@@ -1,5 +1,5 @@
 const app = require('express')();
-const port = 8080;
+const port = 80;
 const {
     v4: uuidv4
 } = require('uuid');
