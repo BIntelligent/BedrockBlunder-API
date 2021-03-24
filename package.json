@@ -2,7 +2,7 @@
   "name": "Micro-AI",
   "version": "1.0.0",
   "description": "",
-  "main": "node index.js",
+  "main": "index.js",
   "scripts": {
     "start": "npm install && node index.js"
   },
@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "actions-on-google": "^2.13.0",
+    "dialogflow-fulfillment": "^0.6.1",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
     "uuid": "^8.3.2"
