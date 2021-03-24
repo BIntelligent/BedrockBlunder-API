@@ -1,5 +1,7 @@
-const app = require('express')();
-const port = process.env.PORT || 8080;
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+const dfff = require("dialogflow-fulfillment");
 const {
     v4: uuidv4
 } = require('uuid');
@@ -29,6 +31,28 @@ app.get('/', async (req, res) => {
     }));
 });
 
+app.post('/', express.json(), async (req, res) => {
+    const agent = new dfff.WebhookClient({
+        request: req,
+        response: res
+    });
+    //===================================================================================
+    var intentMAP = new Map();
+    //===================================================================================
+    intentMAP.set('botstats', async (agent) => {
+        agent.add(await GetBotStats());
+    });
+    //===================================================================================
+    agent.handleRequest(intentMAP);
+});
+//===================================================================================
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
+
+async function GetBotStats() {
+    let data = await require("node-fetch")("http://node1.nmadsen.dk:25689/").then(r => {
+        return r.json();
+    });
+    return (data.stats);
+};
